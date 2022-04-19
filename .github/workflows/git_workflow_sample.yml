@@ -24,4 +24,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: cat ./packages.json | jq -r '[.results[] | select(.path | contains('${{ github.event.inputs.text_box_input }}'))] | sort_by(.updated) | .[-1].path'
+        run: |
+         echo ${{ github.event.inputs.text_box_input }}
+         cat ./packages.json | jq -r '[.results[] | select(.path | contains('${{ github.event.inputs.text_box_input }}'))] | sort_by(.updated) | .[-1].path'
