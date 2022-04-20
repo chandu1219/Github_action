@@ -13,4 +13,6 @@ jobs:
         run: |
          echo ${{ github.event.inputs.text_box_input }}
          #cat ./package.json | jq -r --arg filter_flag ${{ github.event.inputs.text_box_input }} '[.results[] | select(.path | contains($filter_flag))] | sort_by(.updated) | .[-1].path'
-         cat ./package.json | jq -r '[.results[] | select(.path | contains("${{ github.event.inputs.text_box_input }}"))] | sort_by(.updated) | .[-1].path'
+         #cat ./package.json | jq -r '[.results[] | select(.path | contains("${{ github.event.inputs.text_box_input }}"))] | sort_by(.updated) | .[-1].path'
+         market=$(echo ${{ github.event.inputs.text_box_input }} | cut -c 1-2 | tr a-z A-Z)
+         echo $market
