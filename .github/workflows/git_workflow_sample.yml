@@ -4,6 +4,10 @@ on:
     inputs:
       text_box_input:
         required: true
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,4 +19,4 @@ jobs:
          #cat ./package.json | jq -r --arg filter_flag ${{ github.event.inputs.text_box_input }} '[.results[] | select(.path | contains($filter_flag))] | sort_by(.updated) | .[-1].path'
          #cat ./package.json | jq -r '[.results[] | select(.path | contains("${{ github.event.inputs.text_box_input }}"))] | sort_by(.updated) | .[-1].path'
          market=$(echo ${{ github.event.inputs.text_box_input }} | cut -c 1-2 | tr a-z A-Z)-
-         echo $market
+         echo ${{ github.event.inputs.environment }}
